@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
@@ -56,4 +57,28 @@ class User extends Authenticatable
             ? Str::substr($initials, 0, 1).Str::substr($initials, -1)
             : $initials;
     }
+    public function gardens(): HasMany
+{
+    return $this->hasMany(Garden::class);
+}
+
+public function journalEntries(): HasMany
+{
+    return $this->hasMany(GardenJournalEntry::class);
+}
+
+public function tasks(): HasMany
+{
+    return $this->hasMany(GardenTask::class);
+}
+
+public function harvests(): HasMany
+{
+    return $this->hasMany(Harvest::class);
+}
+
+public function expenses(): HasMany
+{
+    return $this->hasMany(Expense::class);
+}
 }
